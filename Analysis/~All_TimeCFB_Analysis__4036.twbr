@@ -3514,6 +3514,7 @@
             <column caption='Net Yards Per Game' datatype='real' name='[Calculation_2092766492372828162]' role='measure' type='quantitative'>
               <calculation class='tableau' formula='[Net Yards Per Play]* (([Off.Plays]+[Def.Plays])/([Games]))' />
             </column>
+            <column caption='Conference' datatype='string' name='[Conference]' role='dimension' type='nominal' />
             <column datatype='integer' name='[Def.Plays]' role='measure' type='quantitative' />
             <column datatype='integer' name='[Games]' role='measure' type='quantitative' />
             <column datatype='real' name='[Net Yards Per Play]' role='measure' type='quantitative' />
@@ -3521,20 +3522,27 @@
             <column caption='Season1' datatype='integer' name='[Season]' role='dimension' type='ordinal' />
             <column caption='Team' datatype='string' name='[Team]' role='dimension' type='nominal' />
             <column-instance column='[Calculation_2092766492372828162]' derivation='Avg' name='[avg:Calculation_2092766492372828162:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[winpct]' derivation='Avg' name='[avg:winpct:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Conference]' derivation='None' name='[none:Conference:nk]' pivot='key' type='nominal' />
             <column-instance column='[Season]' derivation='None' name='[none:Season:ok]' pivot='key' type='ordinal' />
             <column-instance column='[Team]' derivation='None' name='[none:Team:nk]' pivot='key' type='nominal' />
+            <column caption='Winpct' datatype='real' name='[winpct]' role='measure' type='quantitative' />
           </datasource-dependencies>
+          <filter class='categorical' column='[federated.1ntepqv0n5snah0zxyl321fncv6q].[none:Conference:nk]'>
+            <groupfilter function='member' level='[none:Conference:nk]' member='&quot;MAC&quot;' user:ui-domain='relevant' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
           <shelf-sorts>
             <shelf-sort-v2 dimension-to-sort='[federated.1ntepqv0n5snah0zxyl321fncv6q].[none:Team:nk]' direction='DESC' is-on-innermost-dimension='true' measure-to-sort-by='[federated.1ntepqv0n5snah0zxyl321fncv6q].[avg:Calculation_2092766492372828162:qk]' shelf='columns' />
           </shelf-sorts>
           <slices>
+            <column>[federated.1ntepqv0n5snah0zxyl321fncv6q].[none:Conference:nk]</column>
             <column>[federated.1ntepqv0n5snah0zxyl321fncv6q].[none:Season:ok]</column>
           </slices>
           <aggregation value='true' />
         </view>
         <style />
         <panes>
-          <pane id='1' selection-relaxation-option='selection-relaxation-allow'>
+          <pane id='3' selection-relaxation-option='selection-relaxation-allow'>
             <view>
               <breakdown value='auto' />
             </view>
@@ -3550,7 +3558,7 @@
             </style>
           </pane>
         </panes>
-        <rows>[federated.1ntepqv0n5snah0zxyl321fncv6q].[avg:Calculation_2092766492372828162:qk]</rows>
+        <rows>[federated.1ntepqv0n5snah0zxyl321fncv6q].[avg:winpct:qk]</rows>
         <cols>[federated.1ntepqv0n5snah0zxyl321fncv6q].[none:Team:nk]</cols>
       </table>
       <simple-id uuid='{AC01ABC1-8A0A-4C11-84F6-836C67255F3C}' />
@@ -3713,7 +3721,7 @@
       </cards>
       <simple-id uuid='{95D15E11-4E6D-453E-A6D5-504B1DA0F016}' />
     </window>
-    <window class='worksheet' name='Penalties by Win Pct'>
+    <window class='worksheet' maximized='true' name='Penalties by Win Pct'>
       <cards>
         <edge name='left'>
           <strip size='160'>
@@ -3910,14 +3918,15 @@
         </edge>
         <edge name='right'>
           <strip size='160'>
+            <card param='[federated.1ntepqv0n5snah0zxyl321fncv6q].[none:Conference:nk]' type='filter' />
             <card param='[federated.1ntepqv0n5snah0zxyl321fncv6q].[none:Season:ok]' type='filter' />
-            <card pane-specification-id='1' param='[federated.1ntepqv0n5snah0zxyl321fncv6q].[none:Team:nk]' type='color' />
+            <card pane-specification-id='3' param='[federated.1ntepqv0n5snah0zxyl321fncv6q].[none:Team:nk]' type='color' />
           </strip>
         </edge>
       </cards>
       <simple-id uuid='{694D9FDA-1403-4075-8024-70BBD6B8130E}' />
     </window>
-    <window class='worksheet' maximized='true' name='Sheet 11'>
+    <window class='worksheet' name='Sheet 11'>
       <cards>
         <edge name='left'>
           <strip size='160'>
